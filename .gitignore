@@ -1,0 +1,46 @@
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Next.js ───────────────────────────────────────────────────
+.next/
+out/
+build/
+
+# ── Environment Variables ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# ── TypeScript ────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ── SCSS Cache ────────────────────────────────────────────────
+.sass-cache/
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# ── Logs ──────────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Misc ──────────────────────────────────────────────────────
+.vercel
+.turbo
+coverage/

@@ -1,0 +1,61 @@
+// ─── ESGAntall SCSS Mixins ────────────────────────────────────
+
+// Gradient text (brand colors)
+@mixin gradient-text($gradient: var(--gradient-brand)) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Glow effect
+@mixin glow($color: 'cyan') {
+  @if $color == 'cyan'   { box-shadow: var(--glow-cyan); }
+  @if $color == 'blue'   { box-shadow: var(--glow-blue); }
+  @if $color == 'purple' { box-shadow: var(--glow-purple); }
+}
+
+// Glass surface
+@mixin glass($opacity: 0.06) {
+  background: rgba(246, 248, 255, $opacity);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+// Geometric border (brand style)
+@mixin geo-border($color: var(--color-cyan)) {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: $color;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    z-index: -1;
+  }
+}
+
+// Focus ring (accessibility)
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+}
+
+// Truncate text
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Responsive breakpoints
+@mixin mobile  { @media (max-width: 640px)  { @content; } }
+@mixin tablet  { @media (max-width: 1024px) { @content; } }
+@mixin desktop { @media (min-width: 1025px) { @content; } }

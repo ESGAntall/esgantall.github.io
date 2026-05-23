@@ -1,0 +1,50 @@
+---
+description: Styling rules — SCSS and brand system
+globs: **/*.scss,**/*.module.scss
+alwaysApply: false
+---
+
+# Styling Rules
+
+## Brand token reference
+```scss
+// Backgrounds
+var(--color-bg)           // #0A0E17 — page background
+var(--color-bg-surface)   // #0F1420 — cards, panels
+var(--color-bg-elevated)  // #141928 — inputs, dropdowns
+
+// Text
+var(--color-text)         // #F6F8FF — primary
+var(--color-text-muted)   // 55% opacity — secondary
+var(--color-text-hint)    // 30% opacity — placeholders
+
+// Borders
+var(--color-border)       // cyan 12% — default
+var(--color-border-hover) // cyan 30% — hover
+
+// Gradients
+var(--gradient-brand)     // cyan → blue → purple
+var(--gradient-glow-bg)   // ambient hero glow
+
+// Glows
+var(--glow-cyan)
+var(--glow-blue)
+var(--glow-purple)
+var(--glow-sm)
+
+// Typography
+var(--font-primary)       // Space Grotesk
+var(--font-secondary)     // JetBrains Mono
+
+// Radius
+var(--radius-sm)  // 4px
+var(--radius-md)  // 8px
+var(--radius-lg)  // 12px
+var(--radius-xl)  // 16px
+```
+
+## Never do
+- Hardcode colors like `color: #18E0F7` → use `var(--color-cyan)`
+- Use white or light backgrounds → dark tech only
+- Use `Inter`, `Roboto`, `Arial` fonts
+- Use Tailwind classes (project uses SCSS modules)

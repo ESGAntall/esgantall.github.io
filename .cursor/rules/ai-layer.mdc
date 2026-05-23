@@ -1,0 +1,45 @@
+---
+description: AI layer rules — Anthropic API integration
+globs: src/ai/**,src/app/api/**
+alwaysApply: false
+---
+
+# AI Layer Rules
+
+## Structure
+```
+src/ai/
+├── client.ts          ← Anthropic singleton (server only)
+├── actions/
+│   └── chat.ts        ← streaming logic
+└── prompts/
+    └── system.ts      ← system prompts
+```
+
+## API Route pattern (SSE streaming)
+```ts
+// src/app/api/chat/route.ts
+export const runtime = 'edge';
+
+export async function POST(req: NextRequest) {
+  const body: ChatRequest = await req.json();
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1024,
+    stream: true,
+    system: SYSTEM_PROMPT,
+    messages: body.messages,
+  });
+
+  const stream = new ReadableStream({ /* SSE encoding */ });
+  return new Response(stream, {
+    headers: { 'Content-Type': 'text/event-stream' },
+  });
+}
+```
+
+## Hard rules
+- `ANTHROPIC_API_KEY` from `process.env` — never hardcode
+- Model: always `claude-sonnet-4-20250514`
+- Never import `@anthropic-ai/sdk` in client components or pages
+- All AI calls go through `src/ai/` — no inline fetch to Anthropic from UI

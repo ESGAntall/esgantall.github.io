@@ -1,0 +1,42 @@
+---
+description: ESGAntall project rules — always apply
+alwaysApply: true
+---
+
+# ESGAntall — Next.js + AI Project
+
+## Stack
+- Next.js 14 App Router, TypeScript strict
+- SCSS Modules (no Tailwind, no CSS-in-JS)
+- Anthropic SDK (`@anthropic-ai/sdk`) — server side only
+- Fonts: Space Grotesk (UI) + JetBrains Mono (code/labels)
+
+## Atomic Design Structure
+```
+src/components/
+  atoms/      → Button, Input, Badge, Logo, Text
+  molecules/  → Card, ChatBubble, NavBar, InputBar
+  organisms/  → Hero, ChatPanel, Sidebar
+```
+
+Every component folder MUST have exactly 4 files:
+- `ComponentName.tsx`
+- `ComponentName.module.scss`
+- `ComponentName.types.ts`
+- `index.ts`
+
+## Brand Colors (always use CSS vars, never hardcode hex)
+```
+--color-cyan:   #18E0F7   ← primary accent
+--color-blue:   #2E7CFF   ← buttons, links
+--color-purple: #6B3DFF   ← gradients
+--color-light:  #F6F8FF   ← text
+--color-dark:   #0A0E17   ← background
+```
+
+## Rules
+- Dark background ONLY — never white/light bg
+- All colors via CSS custom properties from `src/styles/_tokens.scss`
+- `'use client'` only when browser APIs or hooks are needed
+- Anthropic SDK NEVER imported in client components
+- AI logic lives exclusively in `src/ai/`

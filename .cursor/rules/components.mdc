@@ -1,0 +1,60 @@
+---
+description: Component creation rules
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Component Rules
+
+## Required file structure
+When creating any component, always generate all 4 files together:
+
+```
+ComponentName/
+├── ComponentName.tsx          # Implementation
+├── ComponentName.module.scss  # Scoped SCSS — use brand tokens
+├── ComponentName.types.ts     # Props interface/types
+└── index.ts                   # re-export default
+```
+
+## SCSS pattern
+```scss
+@use '@/styles/mixins' as m;
+
+.root {
+  background: var(--color-bg-surface);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+// Variants via data attributes
+.button {
+  &[data-variant='primary'] { background: var(--gradient-brand); }
+  &[data-variant='ghost']   { border: 1px solid var(--color-border); }
+}
+```
+
+## Types pattern
+```ts
+// ComponentName.types.ts
+export type ButtonVariant = 'primary' | 'ghost' | 'glow';
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  children: React.ReactNode;
+}
+```
+
+## index.ts pattern
+```ts
+export { default } from './ComponentName';
+export type { ComponentNameProps } from './ComponentName.types';
+```
+
+## Available mixins (from `src/styles/_mixins.scss`)
+- `@include m.gradient-text` — brand gradient text
+- `@include m.glow('cyan' | 'blue' | 'purple')` — glow box-shadow
+- `@include m.glass` — glassmorphism surface
+- `@include m.focus-ring` — accessible focus outline
+- `@include m.truncate` — text overflow ellipsis
+- `@include m.mobile / tablet / desktop` — breakpoints
